@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateGameTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <c:if test="#{loginBean.loggedIn eq true}">
+                <c:if test="#{loginBean.admin eq true}">
+                    <h:form>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">#{bundle.CreateGameLabel_name}</span>
+                            </div>
+                            <h:inputText id="name" value="#{gameController.selected.name}" class="form-control" />
+                        </div>
+
+                        <div class="input-group" style="padding-bottom: 20px;">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">#{bundle.CreateGameLabel_description}</span>
+                            </div>
+                            <h:inputTextarea id="description" value="#{gameController.selected.description}" class="form-control" />
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">#{bundle.CreateGameLabel_cover}</span>
+                            </div>
+                            <h:inputText id="cover" value="#{gameController.selected.cover}" class="form-control" />
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">#{bundle.CreateGameLabel_releaseDate}</span>
+                            </div>
+                            <h:inputText id="releaseDate" value="#{gameController.selected.releaseDate}" class="form-control" >
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:inputText>
+                            <div class="input-group-append">
+                                <span class="input-group-text">MM/dd/yyyy</span>
+                            </div>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">#{bundle.CreateGameLabel_size}</span>
+                            </div>
+                            <h:inputText id="size" value="#{gameController.selected.size}" class="form-control" />
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">#{bundle.CreateGameLabel_price}</span>
+                            </div>
+                            <h:inputText id="price" value="#{gameController.selected.price}" class="form-control" />
+                            <div class="input-group-append">
+                                <span class="input-group-text">$</span>
+                            </div>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">#{bundle.CreateGameLabel_genreId}</span>
+                            </div>
+                            <h:selectOneMenu class="form-control" id="genreId" value="#{gameController.selected.genreId}" title="#{bundle.CreateGameTitle_genreId}" required="true" requiredMessage="#{bundle.CreateGameRequiredMessage_genreId}">
+                                <f:selectItems value="#{genreController.itemsAvailableSelectOne}"/>
+                            </h:selectOneMenu>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">#{bundle.CreateGameLabel_companyId}</span>
+                            </div>
+                            <h:selectOneMenu class="form-control" id="companyId" value="#{gameController.selected.companyId}" title="#{bundle.CreateGameTitle_companyId}" required="true" requiredMessage="#{bundle.CreateGameRequiredMessage_companyId}">
+                                <f:selectItems value="#{companyController.itemsAvailableSelectOne}"/>
+                            </h:selectOneMenu>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">#{bundle.CreateGameLabel_languageId}</span>
+                            </div>
+                            <h:selectOneMenu class="form-control" id="languageId" value="#{gameController.selected.languageId}" title="#{bundle.CreateGameTitle_languageId}" required="true" requiredMessage="#{bundle.CreateGameRequiredMessage_languageId}">
+                                <f:selectItems value="#{languageController.itemsAvailableSelectOne}" />
+                            </h:selectOneMenu>
+                        </div>
+                    </h:form>
+                </c:if>
+            </c:if>
+        </ui:define>
+    </ui:composition>
+
+</html>
+
+<!--
+<h:panelGrid columns="2">
+                            <h:outputLabel value="#{bundle.CreateGameLabel_gameId}" for="gameId" />
+                            <h:inputText id="gameId" value="#{gameController.selected.gameId}" title="#{bundle.CreateGameTitle_gameId}" required="true" requiredMessage="#{bundle.CreateGameRequiredMessage_gameId}"/>
+
+                            <h:outputLabel value="#{bundle.CreateGameLabel_name}" for="name" />
+                            <h:inputText id="name" value="#{gameController.selected.name}" title="#{bundle.CreateGameTitle_name}" />
+
+                            <h:outputLabel value="#{bundle.CreateGameLabel_description}" for="description" />
+                            <h:inputText id="description" value="#{gameController.selected.description}" title="#{bundle.CreateGameTitle_description}" />
+
+                            <h:outputLabel value="#{bundle.CreateGameLabel_cover}" for="cover" />
+                            <h:inputText id="cover" value="#{gameController.selected.cover}" title="#{bundle.CreateGameTitle_cover}" />
+
+                            <h:outputLabel value="#{bundle.CreateGameLabel_releaseDate}" for="releaseDate" />
+                            <h:inputText id="releaseDate" value="#{gameController.selected.releaseDate}" title="#{bundle.CreateGameTitle_releaseDate}" >
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:inputText>
+
+                            <h:outputLabel value="#{bundle.CreateGameLabel_size}" for="size" />
+                            <h:inputText id="size" value="#{gameController.selected.size}" title="#{bundle.CreateGameTitle_size}" />
+
+                            <h:outputLabel value="#{bundle.CreateGameLabel_price}" for="price" />
+                            <h:inputText id="price" value="#{gameController.selected.price}" title="#{bundle.CreateGameTitle_price}" required="true" requiredMessage="#{bundle.CreateGameRequiredMessage_price}"/>
+
+                            <h:outputLabel value="#{bundle.CreateGameLabel_genreId}" for="genreId" />
+                            <h:selectOneMenu id="genreId" value="#{gameController.selected.genreId}" title="#{bundle.CreateGameTitle_genreId}" required="true" requiredMessage="#{bundle.CreateGameRequiredMessage_genreId}">
+                                <f:selectItems value="#{genreController.itemsAvailableSelectOne}"/>
+                            </h:selectOneMenu>
+
+                            <h:outputLabel value="#{bundle.CreateGameLabel_companyId}" for="companyId" />
+                            <h:selectOneMenu id="companyId" value="#{gameController.selected.companyId}" title="#{bundle.CreateGameTitle_companyId}" required="true" requiredMessage="#{bundle.CreateGameRequiredMessage_companyId}">
+                                <f:selectItems value="#{companyController.itemsAvailableSelectOne}"/>
+                            </h:selectOneMenu>
+
+                            <h:outputLabel value="#{bundle.CreateGameLabel_languageId}" for="languageId" />
+                            <h:selectOneMenu id="languageId" value="#{gameController.selected.languageId}" title="#{bundle.CreateGameTitle_languageId}" required="true" requiredMessage="#{bundle.CreateGameRequiredMessage_languageId}">
+                                <f:selectItems value="#{languageController.itemsAvailableSelectOne}"/>
+                            </h:selectOneMenu>
+                        </h:panelGrid>
+                        <br />
+                        <h:commandLink action="#{gameController.addToCart}" value="#{bundle.CreateGameSaveLink}" />
+                        <br />
+                        <br />
+                        <h:commandLink action="#{gameController.create}" value="#{bundle.CreateGameSaveLink}" />
+                        <br />
+                        <br />
+                        <h:commandLink action="#{gameController.prepareList}" value="#{bundle.CreateGameShowAllLink}" immediate="true"/>
+                        <br />
+                        <br />
+                        <h:link outcome="/index" value="#{bundle.CreateGameIndexLink}"/>
+
+
+-->

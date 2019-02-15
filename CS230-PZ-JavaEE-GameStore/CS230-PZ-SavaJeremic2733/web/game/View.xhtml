@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewGameTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:form>
+                    <h:panelGrid columns="2">
+                        <h:outputText value="#{bundle.ViewGameLabel_gameId}"/>
+                        <h:outputText value="#{gameController.selected.gameId}" title="#{bundle.ViewGameTitle_gameId}"/>
+                        <h:outputText value="#{bundle.ViewGameLabel_name}"/>
+                        <h:outputText value="#{gameController.selected.name}" title="#{bundle.ViewGameTitle_name}"/>
+                        <h:outputText value="#{bundle.ViewGameLabel_description}"/>
+                        <h:outputText value="#{gameController.selected.description}" title="#{bundle.ViewGameTitle_description}"/>
+                        <h:outputText value="#{bundle.ViewGameLabel_cover}"/>
+                        <h:outputText value="#{gameController.selected.cover}" title="#{bundle.ViewGameTitle_cover}"/>
+                        <h:outputText value="#{bundle.ViewGameLabel_releaseDate}"/>
+                        <h:outputText value="#{gameController.selected.releaseDate}" title="#{bundle.ViewGameTitle_releaseDate}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewGameLabel_size}"/>
+                        <h:outputText value="#{gameController.selected.size}" title="#{bundle.ViewGameTitle_size}"/>
+                        <h:outputText value="#{bundle.ViewGameLabel_price}"/>
+                        <h:outputText value="#{gameController.selected.price}" title="#{bundle.ViewGameTitle_price}"/>
+                        <h:outputText value="#{bundle.ViewGameLabel_genreId}"/>
+                        <h:outputText value="#{gameController.selected.genreId}" title="#{bundle.ViewGameTitle_genreId}"/>
+                        <h:outputText value="#{bundle.ViewGameLabel_companyId}"/>
+                        <h:outputText value="#{gameController.selected.companyId}" title="#{bundle.ViewGameTitle_companyId}"/>
+                        <h:outputText value="#{bundle.ViewGameLabel_languageId}"/>
+                        <h:outputText value="#{gameController.selected.languageId}" title="#{bundle.ViewGameTitle_languageId}"/>
+                    </h:panelGrid>
+                    <br />
+                    <h:commandLink class="gd-btn menu-btn-log" action="#{gameController.prepareList}" value="#{bundle.ViewGameShowAllLink}"/>
+                    <br />
+                    <br />
+                    <h:link class="gd-btn menu-btn-reg" outcome="/index" value="#{bundle.ViewGameIndexLink}"/>
+
+                </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

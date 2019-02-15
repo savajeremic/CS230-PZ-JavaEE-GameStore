@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewCartItemsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewCartItemsLabel_cartItemsId}"/>
+                    <h:outputText value="#{cartItemsController.selected.cartItemsId}" title="#{bundle.ViewCartItemsTitle_cartItemsId}"/>
+                    <h:outputText class="hide-id" value="#{bundle.ViewCartItemsLabel_flagId}"/>
+                    <h:outputText class="hide-id" value="#{cartItemsController.selected.flagId}" title="#{bundle.ViewCartItemsTitle_flagId}"/>
+                    <h:outputText value="#{bundle.ViewCartItemsLabel_gameId}"/>
+                    <h:outputText value="#{cartItemsController.selected.gameId}" title="#{bundle.ViewCartItemsTitle_gameId}"/>
+                    <h:outputText value="#{bundle.ViewCartItemsLabel_cartId}"/>
+                    <h:outputText value="#{cartItemsController.selected.cartId}" title="#{bundle.ViewCartItemsTitle_cartId}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{cartItemsController.destroyAndView}" value="#{bundle.ViewCartItemsDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewCartItemsEditLink}"/>
+                <br />
+                <h:commandLink action="#{cartItemsController.prepareCreate}" value="#{bundle.ViewCartItemsCreateLink}" />
+                <br />
+                <h:commandLink action="#{cartItemsController.prepareList}" value="#{bundle.ViewCartItemsShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewCartItemsIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

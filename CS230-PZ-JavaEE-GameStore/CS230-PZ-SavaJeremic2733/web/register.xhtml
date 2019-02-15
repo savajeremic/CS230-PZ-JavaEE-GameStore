@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    <body>
+        <div id="registerModal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document" style="margin-top: 14%; box-shadow: 1px 1px 100px 5px #7593c5;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">REGISTER</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"><i class="fas fa-times" style="color: #89959e;"></i></span>
+                        </button>
+                    </div>
+                    <h:form id="register">
+                        <div class="modal-body">
+                            <div class="md-form">
+                                <i class="fas fa-pencil-alt prefix"></i>
+                                <h:inputText class="form-control" id="username" a:placeholder="#{bundle.CreateUserTitle_username}" 
+                                             value="#{userController.selected.username}" required="true" requiredMessage="#{bundle.CreateUserRequiredMessage_username}"/>
+                            </div>
+
+                            <div class="md-form">
+                                <i class="fa fa-lock prefix"></i>
+                                <h:inputSecret class="form-control" id="password" a:placeholder="#{bundle.CreateUserTitle_password}" 
+                                               value="#{userController.selected.password}" required="true" requiredMessage="#{bundle.CreateUserRequiredMessage_password}"/>
+                            </div>
+
+                            <div class="md-form">
+                                <i class="fa fa-envelope prefix"></i>
+                                <h:inputText class="form-control" id="email" a:placeholder="#{bundle.CreateUserTitle_email}" 
+                                             value="#{userController.selected.email}" required="true" requiredMessage="#{bundle.CreateUserRequiredMessage_email}"/>
+                            </div>
+
+                            <div class="md-form">
+                                <i class="fas fa-address-book prefix"></i>
+                                <h:inputText class="form-control" id="name" a:placeholder="#{bundle.CreateUserTitle_name}" 
+                                             value="#{userController.selected.name}" required="true" requiredMessage="#{bundle.CreateUserRequiredMessage_name}"/>
+                            </div>
+
+                            <div class="md-form">
+                                <i class="fas fa-address-book prefix"></i>
+                                <h:inputText class="form-control" id="surname" a:placeholder="#{bundle.CreateUserTitle_surname}" 
+                                             value="#{userController.selected.surname}" required="true" requiredMessage="#{bundle.CreateUserRequiredMessage_surname}"/>
+                            </div>
+
+                            <div class="md-form">
+                                <i class="fas fa-file-image prefix"></i>
+                                <h:inputText class="form-control" id="avatar" a:placeholder="#{bundle.CreateUserTitle_avatar}" 
+                                             value="#{userController.selected.avatar}" required="true" requiredMessage="#{bundle.CreateUserRequiredMessage_avatar}"/>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <h:commandButton action="#{userController.create()}" class="gd-btn menu-btn-log form-btn" value="#{bundle.CreateUserSaveLink}"/>
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

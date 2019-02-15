@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditLanguageTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditLanguageLabel_languageId}" for="languageId" />
+                    <h:inputText id="languageId" value="#{languageController.selected.languageId}" title="#{bundle.EditLanguageTitle_languageId}" required="true" requiredMessage="#{bundle.EditLanguageRequiredMessage_languageId}"/>
+                    <h:outputLabel value="#{bundle.EditLanguageLabel_name}" for="name" />
+                    <h:inputText id="name" value="#{languageController.selected.name}" title="#{bundle.EditLanguageTitle_name}" />
+                </h:panelGrid>
+                <h:commandLink action="#{languageController.update}" value="#{bundle.EditLanguageSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditLanguageViewLink}"/>
+                <br />
+                <h:commandLink action="#{languageController.prepareList}" value="#{bundle.EditLanguageShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditLanguageIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

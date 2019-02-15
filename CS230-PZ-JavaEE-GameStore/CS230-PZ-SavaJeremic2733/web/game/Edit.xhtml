@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditGameTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <c:if test="#{loginBean.admin eq true}">
+                <h:form>
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="#{bundle.EditGameLabel_gameId}" for="gameId" />
+                        <h:inputText id="gameId" value="#{gameController.selected.gameId}" title="#{bundle.EditGameTitle_gameId}" required="true" requiredMessage="#{bundle.EditGameRequiredMessage_gameId}"/>
+                        <h:outputLabel value="#{bundle.EditGameLabel_name}" for="name" />
+                        <h:inputText id="name" value="#{gameController.selected.name}" title="#{bundle.EditGameTitle_name}" />
+                        <h:outputLabel value="#{bundle.EditGameLabel_description}" for="description" />
+                        <h:inputText id="description" value="#{gameController.selected.description}" title="#{bundle.EditGameTitle_description}" />
+                        <h:outputLabel value="#{bundle.EditGameLabel_cover}" for="cover" />
+                        <h:inputText id="cover" value="#{gameController.selected.cover}" title="#{bundle.EditGameTitle_cover}" />
+                        <h:outputLabel value="#{bundle.EditGameLabel_releaseDate}" for="releaseDate" />
+                        <h:inputText id="releaseDate" value="#{gameController.selected.releaseDate}" title="#{bundle.EditGameTitle_releaseDate}" >
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:inputText>
+                        <h:outputLabel value="#{bundle.EditGameLabel_size}" for="size" />
+                        <h:inputText id="size" value="#{gameController.selected.size}" title="#{bundle.EditGameTitle_size}" />
+                        <h:outputLabel value="#{bundle.EditGameLabel_price}" for="price" />
+                        <h:inputText id="price" value="#{gameController.selected.price}" title="#{bundle.EditGameTitle_price}" required="true" requiredMessage="#{bundle.EditGameRequiredMessage_price}"/>
+                        <h:outputLabel value="#{bundle.EditGameLabel_genreId}" for="genreId" />
+                        <h:selectOneMenu id="genreId" value="#{gameController.selected.genreId}" title="#{bundle.EditGameTitle_genreId}" required="true" requiredMessage="#{bundle.EditGameRequiredMessage_genreId}">
+                            <f:selectItems value="#{genreController.itemsAvailableSelectOne}"/>
+                        </h:selectOneMenu>
+                        <h:outputLabel value="#{bundle.EditGameLabel_companyId}" for="companyId" />
+                        <h:selectOneMenu id="companyId" value="#{gameController.selected.companyId}" title="#{bundle.EditGameTitle_companyId}" required="true" requiredMessage="#{bundle.EditGameRequiredMessage_companyId}">
+                            <f:selectItems value="#{companyController.itemsAvailableSelectOne}"/>
+                        </h:selectOneMenu>
+                        <h:outputLabel value="#{bundle.EditGameLabel_languageId}" for="languageId" />
+                        <h:selectOneMenu id="languageId" value="#{gameController.selected.languageId}" title="#{bundle.EditGameTitle_languageId}" required="true" requiredMessage="#{bundle.EditGameRequiredMessage_languageId}">
+                            <f:selectItems value="#{languageController.itemsAvailableSelectOne}"/>
+                        </h:selectOneMenu>
+                    </h:panelGrid>
+                    <h:commandLink action="#{gameController.update}" value="#{bundle.EditGameSaveLink}"/>
+                    <br />
+                    <br />
+                    <h:link outcome="View" value="#{bundle.EditGameViewLink}"/>
+                    <br />
+                    <h:commandLink action="#{gameController.prepareList}" value="#{bundle.EditGameShowAllLink}" immediate="true"/>
+                    <br />
+                    <br />
+                    <h:link outcome="/index" value="#{bundle.EditGameIndexLink}" />
+                </h:form>
+            </c:if>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light menu">
+            <div class="collapse navbar-collapse menu_container" id="navbarSupportedContent" style="padding-bottom: 0.6%;">
+                <ul class="navbar-nav mr-auto">
+                    <h:link class="navbar-brand" outcome="/index" value="Gamedream"/>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" 
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Home
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <h:link class="dropdown-item" outcome="/index" value="Home"/>
+                            <h:link class="dropdown-item" outcome="/game/List" value="Show All Game Items"/>
+                            <div class="dropdown-divider"></div>
+                            <h:dataTable value="#{genreController.items}" var="item">
+                                <h:column>
+                                    <a href="#" class="dropdown-item" style="width: 150%;">
+                                        <h:outputText value="#{item.name}"/>
+                                        <i class="fa fa-angle-double-right menu-arrow" aria-hidden="true"></i>
+                                    </a>
+                                </h:column>
+                            </h:dataTable>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" 
+                           aria-haspopup="true" aria-expanded="false">
+                            About
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a href="#" class="dropdown-item">About us</a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item">Join Us</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" 
+                           aria-haspopup="true" aria-expanded="false">
+                            Support
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a href="#" class="dropdown-item">Report Issues</a>
+                            <a href="#" class="dropdown-item">GameDream</a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item">Our Department</a>
+                        </div>
+                    </li>
+
+                    <c:if test="#{loginBean.loggedIn eq false}">
+                        <li class="nav-item dropdown">
+                            <a href="#" style="color: #c6142c;" class="nav-link dropdown-toggle" 
+                               data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <span class="glyphicon glyphicon-log-in"/> 
+                                SIGN IN
+                                <span class="caret"/>
+                            </a>
+                            <div class="dropdown-menu signin-drop" aria-labelledby="navbarDropdown">
+                                <a href="#" class="dropdown-item">
+                                    <button data-toggle="modal" data-target="#loginModal" class="gd-btn menu-btn-log">Login</button>
+                                    <button data-toggle="modal" data-target="#registerModal" class="gd-btn menu-btn-reg">Register</button>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a href="#" class="dropdown-item">
+                                    <h:graphicImage class="signin-img" value = "/resources/img/logreggames.png"/>
+                                </a>
+                            </div>
+                        </li>
+                    </c:if>
+
+                    <c:if test="#{loginBean.admin eq true}">
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" 
+                               aria-haspopup="true" aria-expanded="false">Admin Work
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <h:link class="dropdown-item" outcome="/game/List" value="Manage Games"/>
+                                <h:link class="dropdown-item" outcome="/genre/List" value="Manage Genres"/>
+                                <h:link class="dropdown-item" outcome="/company/List" value="Manage Companies"/>
+                                <h:link class="dropdown-item" outcome="/language/List" value="Manage Languages"/>
+                            </div>
+                        </li>
+                    </c:if>
+
+                    <c:if test="#{loginBean.loggedIn eq true}">
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" 
+                               aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-user-astronaut"></i>#{loginBean.username}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <h:link class="dropdown-item" outcome="/cartItems/Create" value="Buy Games"/>
+                                <h:link class="dropdown-item" outcome="/cartItems/List" value="Your Games"/>
+                                <a href="#" class="dropdown-item menu-account_user-name">#{loginBean.username}</a>
+                                <div class="dropdown-divider"></div>
+                                <h:form>
+                                    <h:commandLink action="#{loginBean.logout()}" value="Logout"></h:commandLink>
+                                </h:form>
+                            </div>
+                        </li>
+                    </c:if>
+
+                    <li class="nav-item dropdown menu_tray">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" 
+                           aria-haspopup="true" aria-expanded="false">
+                            <span class="fas fa-shopping-cart"></span>                        
+                        </a>
+                        <!-- ukoliko korisnik nije ulogovan. -->
+                        <c:if test="#{loginBean.loggedIn eq false}">
+                            <div class="dropdown-menu cart-drop menu-cart-empty" aria-labelledby="navbarDropdown">
+                                <span class="fas fa-shopping-cart"></span>
+                                <p class="menu-cart-empty-header">Your Cart Is Empty</p>
+                                <div class="dropdown-divider"></div>
+                                <div>
+                                    <p> Please register or log in in order to buy </p>
+                                    <button data-toggle="modal" data-target="#loginModal" class="gd-btn menu-btn-log">Login</button>
+                                    <button data-toggle="modal" data-target="#registerModal" class="gd-btn menu-btn-reg">Register</button>
+                                </div>
+                            </div>
+                        </c:if>
+                        <!-- ukoliko je korisnik ulogovan. -->
+                        <c:if test="#{loginBean.loggedIn eq true}">
+                            <div class="dropdown-menu cart-drop menu-cart-user">
+                                <div class="pre-scrollable">
+                                    <div class="cart-header">
+                                        <!--<p class="items-added"><span ></span>.00$</p>-->
+                                        <!--<h:button class="gd-btn checkout-btn checkout-btn-menu" value="Go to checkout" />-->
+                                        <!--<p class="alert alert-success">Successfully bought games!</p>-->
+                                        <span class="cart-menu-text"> Your shopping cart </span>
+                                        <p class="items-added">#{loginBean.allOrders.size()} items added</p>
+                                    </div>
+                                    <h:form>
+                                        <h:dataTable value="#{loginBean.allOrders}" var="item">
+                                            <h:column>
+                                                <div class="media-cart" >
+                                                    <a class="pull-left">
+                                                        <img src="#{item.gameId.cover}" class="cart-img" />
+                                                    </a>
+                                                    <div class="media-body">
+                                                        <span class="media-meta pull-right">
+                                                            <p class="cart-price">#{item.gameId.price}.00$</p>
+                                                        </span>
+                                                        <div class="pull-left">
+                                                            <h4 class="title trunc-name" style="color: #000">#{item.gameId.name}</h4>
+                                                            <p class="remove-cart-text" >
+                                                                <h:commandLink action="#{cartItemsController.destroy}" value="Remove"/>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <hr class="menu-break"/>
+                                                </div>
+                                            </h:column>
+                                        </h:dataTable>
+                                    </h:form>
+                                </div>
+
+                            </div>
+                        </c:if>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </body>
+</html>
